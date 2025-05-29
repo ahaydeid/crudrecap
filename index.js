@@ -31,21 +31,38 @@ app.get("/", (req, res) => {
 //   });
 // });
 
-app.post("/tambah", (req, res) => {
-  const { nim, namaLengkap, kelas, alamat } = req.body;
+// app.post("/tambah", (req, res) => {
+//   const { nim, namaLengkap, kelas, alamat } = req.body;
+//   const sql = `INSERT INTO mahasiswa (nim, nama_lengkap, kelas, alamat) VALUES ('${nim}', '${namaLengkap}', '${kelas}', '${alamat}')`;
+//   db.query(sql, (err, result) => {
+//     // Kalau error
+//     if (err) {
+//       console.error(err);
+//       return response(500, null, "error buangs", res);
+//     }
 
-  const sql = `INSERT INTO mahasiswa (nim, nama_lengkap, kelas, alamat) VALUES ('${nim}', '${namaLengkap}', '${kelas}', '${alamat}')`;
-  db.query(sql, (error, result) => {
-    if (error) response(500, "invalid", "error buangs", res);
-    if (result?.affectedRows) {
-      const data = {
-        isSuccess: result.affectedRows,
-        id: result.insertId,
-      };
-      response(200, data, "Data added successfuly", res);
-    }
-  });
-});
+//     // Kalau berhasil
+//     if (result.rowCount > 0) {
+//       response(200, null, "Data berhasil ditambahkan", res);
+//     } else {
+//       response(400, null, "Data gagal ditambahkan", res);
+//     }
+//   });
+// });
+
+// app.put("/update", (req, res) => {
+//   const { nim, namaLengkap, kelas, alamat } = req.body;
+//   const sql = `UPDATE mahasiswa SET nama_lengkap = '${namaLengkap}', kelas = '${kelas}', alamat = '${alamat}' WHERE nim = '${nim}'`;
+
+//   db.query(sql, (err, result) => {
+//     if (err) response(500, "Invalid", "Error", res);
+//     if (result.rowCount > 0) {
+//       response(200, "OK", "Data updated successfully", res);
+//     } else {
+//       response(404, "Failed", "User not found", res);
+//     }
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

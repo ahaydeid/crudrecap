@@ -10,21 +10,16 @@ app.use(bodyParser.json());
 // Penulisan routes
 app.get("/", (req, res) => {
   db.query("SELECT * FROM mahasiswa", (error, result) => {
-    response(200, result.rows, "Get all data from table mahasiswa", res);
+    response(200, result, "Get all data from table mahasiswa", res);
   });
 });
 
-// app.post("/halo", (req, res) => {
-//   const data = req.body;
-//   if (data.username == "ahadi" && data.password == "admin123") {
-//     res.send("Login berhasil");
-//     console.log("Login berhasil");
-//     console.log(`Selamat datang ${data.username}`);
-//   } else {
-//     res.send("Username/Password salah");
-//     console.log("Username/Password salah");
-//   }
-// });
+app.get("/find", (req, res) => {
+  const sql = `SELECT * FROM mahasiswa WHERE nim = ${req.query.nim}`;
+  db.query(sql, (error, result) => {
+    response(200, result.rows, "Find Mahasiswa Name", res);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

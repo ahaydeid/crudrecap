@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan input</title>
+    <style>
+      img{ object-fit: cover; height: 100px; width: 100px; padding: 5px; margin-top: 10px;} span{ font-weight: bold; } .card{ display: flex; width: 350px; margin: 5px; margin-left: 10px; padding: 20px; background-color: aqua;
+      justify-content: center;} .deskripsi{ flex: 1; } .isi{ flex: 1; } .container { display: flex; flex-wrap: wrap; /* agar baris baru dibuat jika sudah 3 elemen */ }
+
+    </style>
+  </head>
+  <body>
+    <form action="/submit" method="post" enctype="multipart/form-data">
+      <div style="margin-bottom: 10px;">
+        <label for="name">Nama</label>
+        <input type="text" name="name" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="nim">NIM</label>
+        <input type="text" name="nim" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="kelas">Kelas</label>
+        <input type="text" name="kelas" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="alamat">Alamat</label>
+        <input type="text" name="alamat" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="foto">Foto</label>
+        <input type="file" name="foto" />
+      </div>
+      <button type="submit" onclick="success()">Kirim</button>
+    </form>
+    <div class="container">
+      {{#each hasil}}
+        <div class="card">
+          <img src="./uploads/{{this.foto}}" alt="Harusnya Ada Foto Mahasiswa" />
+          <div class="deskripsi">
+            <p>Nama Lengkap </p>
+            <p>NIM </p>
+            <p>Kelas </p>
+            <p>Alamat </p>
+          </div>
+          <div class="isi">
+            <p><span>: {{this.nama_lengkap}}</span></p>
+            <p><span>: {{this.nim}}</span></p>
+            <p><span>: {{this.kelas}}</span></p>
+            <p><span>: {{this.alamat}}</span></p>
+            <button onclick="edit({{this.nim}})" style="margin-bottom: 5px;">Edit Data</button><br>
+            <button onclick="hapus({{this.nim}})">Hapus Data</button>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+    <script>
+      function hapus(nim){ if(confirm("Hapus datanya?")){ fetch(`/${nim}`, {method: "delete"}).then(()=>{ location.reload() })} } function edit(nim){ window.location.href = `/edit/${nim}`} function success(){location.reload()}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan input</title>
+    <style>
+      span{ font-weight: bold; } .card{ display: flex; width: 350px; margin: 5px; margin-left: 10px; padding: 20px; background-color: aqua; justify-content: center;} .deskripsi{ flex: 1; } .isi{ flex: 1; } .container { display: flex;
+      flex-wrap: wrap; /* agar baris baru dibuat jika sudah 3 elemen */ }
+
+    </style>
+  </head>
+  <body>
+    <form action="/update" method="post">
+      <div style="margin-bottom: 10px;">
+        <label for="name">Nama</label>
+        <input type="text" name="name" value="{{data.nama_lengkap}}" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="nim">NIM</label>
+        <input type="text" name="nim" value="{{data.nim}}" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="kelas">Kelas</label>
+        <input type="text" name="kelas" value="{{data.kelas}}" />
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="alamat">Alamat</label>
+        <input type="text" name="alamat" value="{{data.alamat}}" />
+      </div>
+      <button type="submit">Update</button>
+    </form>
+    <script>
+      function hapus(nim){ if(confirm("Hapus datanya?")){ fetch(`/${nim}`, {method: "delete"}).then(()=>{ location.reload() })} }
+    </script>
+  </body>
+</html>
